@@ -1,0 +1,9 @@
+<% if can? :admin, Spree::MenuItem %>
+  <ul class="nav nav-sidebar">
+    <%= tab Spree::Page, 
+            url: spree.admin_menu_items_url, 
+            icon: 'leaf', 
+            label: plural_resource_name(Spree::MenuItem) 
+    %>
+  </ul>
+<% end %>
