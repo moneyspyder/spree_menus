@@ -12,38 +12,12 @@
 <% end %>
 
 <% if @menu_items.any? %>
-  <table class="table" id="listing_pages" data-hook>
-    <colgroup>
-      <col style="width: 40%">
-      <col style="width: 35%">
-      <col style="width: 10%">
-      <col style="width: 15%">
-    </colgroup>
-    <thead>
-      <tr data-hook="admin_pages_index_headers">
-        <th><%= Spree::MenuItem.human_attribute_name(:title) %></th>
-        <th><%= Spree.t(:link, scope: :static_content) %></th>
-        <th class="text-center"><%= Spree::MenuItem.human_attribute_name(:visible) %></th>
-        <th data-hook="admin_pages_index_header_actions" class="actions"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @pages.each do |page| %>
-        <tr data-hook="admin_pages_index_rows" class="<%= cycle('odd', 'even') %>" id="<%= dom_id page %>">
-          <td><%= page.title %></td>
-          <td><%= link_to page.link, page.link, target: '_blank' %></td>
-          <td class="text-center"><%= content_tag(:i, '', class: 'icon icon-ok') if page.visible %></td>
-          <td class="actions text-right" data-hook="admin_pages_index_row_actions">
-            <%= link_to_edit page, no_text: true %>
-            <%= link_to_delete page, no_text: true %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div id="list-menu-items" data-hook>
+    <%= render 'list' %>
+  </div>
 <% else %>
-  <div class="alert alert-warning no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: Spree::MenuItem.model_name.human) %>,
-    <%= link_to Spree.t(:add_one), spree.new_admin_menu_item_path %>!
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::MenuItem)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url %>!
   </div>
 <% end %>
