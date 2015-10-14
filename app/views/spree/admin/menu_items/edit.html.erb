@@ -6,6 +6,8 @@
 
 <div id="ajax_error" class="errorExplanation" style="display:none;"></div>
 
+<%= render 'form', resource: @menu_item %>
+
 <%= form_for [:admin, @menu_item] do |f| %>
   <fieldset>
     <%# render partial: 'form', locals: { f: f } %>
